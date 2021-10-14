@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Rob Bates">
+  <meta property="og:url" content="http://lowfid.com">
+  <meta property="og:type" content="website">
+  <!-- <meta property="og:image" content="favsite_thumb.png"> -->
+  <meta property="og:title" content="Piano 2.0">
+  <meta property="og:description" content="Key Signatures are crazy. Let's make something easier to learn.">
+  <title>Piano 2.0</title>
+  <meta name="description" content="Key Signatures are crazy. Let's make something easier to learn.">
+  <!--
+  <link rel="icon" href="favicon.ico">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="favicon-apple-touch.png">
+  -->
+
+  <link rel="stylesheet" href="css/piano2.css">
+  <script src="js/piano2.js"></script>
+  <script type="text/javascript">
+    /**
+    * Don't trigger on page-load, as user MUST interact with page for
+    * audio-context to be available in Web API
+    */
+    function piano2demo(btn) {
+      btn.classList.add("invisible");
+      myPiano = new Piano2();
+      //myPiano.enableDebugging();
+      myPiano.addKeyListener();
+      
+      myPiano.generateKeyboard("piano1", Piano2.PIANO_TYPE_CLASSIC);
+      myPiano.generateKeyboard("piano2", Piano2.PIANO_TYPE_NEW);
+      
+      var comment = document.getElementById("comment");
+      comment.classList.remove("invisible");
+    }
+  </script>
+</head>
+<body>
+  <h3>Classic Piano</h3>
+  <div id="piano1"></div>
+
+  <h3>Piano 2.0</h3>
+  <div id="piano2"></div>
+  
+  <button id="bDemo" onclick="piano2demo(this)">Show Demo</button>
+  
+  <div id="comment" class="invisible">
+    <h3>What Should I Do?</h3>
+    <p>
+      This Demo shows the difference between a Classical Piano and "Piano 2.0"
+    </p>
+    <p>
+      Click a key to play a note.  It will highlight on both pianos, so you can see what notes are equivalent.
+    </p>
+    <p>
+      Additionally you can type on your keyboard.  The top QWERTY row are the black keys in Piano 2.0, and the ASDF row are the white keys.  Holding SHIFT or using CAPSLOCK shifts the pitch up 2 octaves.
+    </p>
+
+    <h3>How does Piano 2.0 work?</h3>
+    <p>
+      Piano 2.0 uses a 12 tone scale, just like classical pianos, but it only uses A-F and every note has a sharp and a flat black key.  The long black key serves as a landmark helping you find A.  The rounded C# key serves as an additional landmark, and additionally the top of the key is rounded as well.  These landmarks are both visual and tactile.
+    </p>
+    <p>
+      In Classical Piano there are awkward enharmonics (e.g. B#/Cb or E#/Fb).  In Piano 2.0, every black key has 2 enharmonics, and no white keys have enharmonics.
+    </p>
+    <p>
+      In Classical Piano, every major scale has a different quantity of sharps and flats (e.g. C Major has none, whereas C# has 7).  This makes each scale look different.  In Piano 2.0 there are 2 variants.  If a scale starts on a white key, it has 4 sharps-or-flats.  If it starts on a black key, then it has 3.  This leads to what we call constellations of scales.  Piano 2.0 is designed around consistent visual patterns.  So all Major scales have 1 constellation, whereas all minor scales share another constellation.  The Major Scale is always 3 whole steps of 1 key color, then a half step to the opposite key color, then 3 more whole steps of the new key color, then resolving back to the root of the scale (e.g. ABC C#D#E#F# A).
+    </p>
+  </div>
+</body>
+</html>

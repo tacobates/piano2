@@ -1,0 +1,107 @@
+/*************** Boilerplate ***************/
+* { box-sizing:border-box; }
+html, body {
+  font-family:Verdana, Geneva, sans-serif;
+  margin:0px;
+  padding:0px;
+  min-height:100%;
+  text-rendering:optimizeLegibility;
+}
+
+
+/*************** Variables ***************/
+:root{
+  --base1:#0c162e; /* more purple: #1c0d30 */
+  --base2:#0b1a40;
+  --base3:#081c4d;
+  --accent1:#6100e0;
+  --accent2:#5200bd;
+  --accent3:#4602a1;
+  --pale1:#6995ff;
+  --pale2:#3d76ff;
+  --pale3:#2162ff;
+  
+  --keyHeight:180px;
+  --keyWidth:27px;
+
+}
+
+
+/*************** Basics ***************/
+html {
+  background-color:var(--base1);
+}
+
+body {
+  background-color:var(--base2);
+  color:var(--pale1);
+  padding: 10px;
+}
+
+
+/*************** Main ***************/
+#piano2 { margin-left:95px; }
+
+.invisible { display:none; }
+
+.piano {
+  position:relative;
+  height:var(--keyHeight);
+}
+
+.key {
+  background-color:#fffff2;
+  border:solid 1px #999;
+  color:transparent;
+  display:inline-block;
+  font-size:1.1em;
+  height:var(--keyHeight);
+  width:var(--keyWidth);
+
+  position:absolute;
+  top:0;
+  left:calc(var(--xOffset) * var(--keyWidth)); /*black keys still offset based like white ones*/
+  z-index:1;
+
+/*
+  display:table-cell;
+  vertical-align:bottom;
+*/
+  display:flex;
+  justify-content:flex-end;
+  flex-direction:column;
+  text-align:center;
+}
+.key + .key { border-left:none; }
+
+.key.black {
+  --keyHeight:85px;
+  background-color:#0f0f0f;
+  border:none;
+  font-size:0.8em;
+  margin-left:3px;
+  padding-bottom:40px;
+  width:18px; /*don't use --keyWidth, as it will break left offset calc*/
+  
+  z-index:9;
+}
+.key.blackBig { /*Piano 2.0 has and extra long F#/Ab black key*/
+  --keyHeight:150px;
+  clip-path:polygon(0 0, 100% 0, 100% 93%, 80% 100%, 25% 100%, 0 92%);
+}
+.key.blackCenter { /*Piano 2.0 has a rounded C#*/
+  --keyHeight:95px;
+  background-color:#171715;
+  border-bottom-left-radius:15px;
+  border-bottom-right-radius:15px;
+}
+.key.blackLighter { /*Piano 2.0 has lighter A#/B#/D#/E# */
+  background-color:#3f3f3f;
+}
+
+.key.highlighted { background-color:#b8daff; }
+.key.black.highlighted { background-color:#005bbd; }
+
+/* Label Revealing on Hover/Highlight */
+.key:hover .keyLabel, .key.highlighted .keyLabel { color:#111; }
+.key.black:hover .keyLabel, .key.black.highlighted .keyLabel { color:#eee; }
